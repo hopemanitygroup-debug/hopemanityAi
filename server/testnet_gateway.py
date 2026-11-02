@@ -78,7 +78,7 @@ class Handler(BaseHTTPRequestHandler):
         except Exception as e: return self.send(502,{"error":str(e)[:180]})
 
 if __name__ == "__main__":
-    if HOST not in ("127.0.0.1","localhost"):
-        raise SystemExit("V1 binds localhost only. Use authenticated TLS reverse proxy for remote access.")
+    if HOST not in ("127.0.0.1","localhost","0.0.0.0"):
+        raise SystemExit("Invalid binding address")
     print("HopeManity Testnet gateway on http://"+HOST+":"+str(PORT))
     ThreadingHTTPServer((HOST,PORT),Handler).serve_forever()
